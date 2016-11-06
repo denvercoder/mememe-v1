@@ -97,6 +97,7 @@
 					D70B5B931DCED207009AE91F = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 88UZ84VZEF;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};

@@ -26,6 +26,8 @@
 	<string>Main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Meme Me would like to access your photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Meme Me would like to access your camera.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeColorAttributeName : UIColor.black,
         NSForegroundColorAttributeName : UIColor.white,
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : CGFloat(2.5)
+        NSStrokeWidthAttributeName : -3
     ] as [String : Any]
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +31,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view, typically from a nib.
         topTextField.text = "TOP TEXT (click to edit)"
         bottomTextField.text = "BOTTOM TEXT (click to edit)"
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = NSTextAlignment.center
+        bottomTextField.textAlignment = NSTextAlignment.center
+        topTextField.delegate = self
+        bottomTextField.delegate = self
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField.text == "TOP TEXT (click to edit)" || textField.text == "BOTTOM TEXT (click to edit)" {
+            textField.text = ""
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

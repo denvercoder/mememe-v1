@@ -69,6 +69,9 @@
                                 <state key="normal" title="Albums">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="SelectImageFromAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sjc-m5-eVO"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-BT-6mf" userLabel="ImageView">
                                 <rect key="frame" x="0.0" y="60" width="375" height="567"/>
@@ -96,10 +99,13 @@
                             <constraint firstAttribute="trailing" secondItem="cQC-HR-ACj" secondAttribute="trailing" id="zKk-Yd-7PA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ImagePickerView" destination="yCJ-BT-6mf" id="EhM-ye-kHA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-175.19999999999999" y="97.601199400299862"/>
+            <point key="canvasLocation" x="70" y="97"/>
         </scene>
     </scenes>
     <resources>

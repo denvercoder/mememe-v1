@@ -80,6 +80,20 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="567"/>
                                 <color key="backgroundColor" red="0.67450980392156867" green="0.69019607843137254" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-bb-u3d" userLabel="topTextField">
+                                <rect key="frame" x="16" y="122" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4z-1b-s21" userLabel="bottomTextField">
+                                <rect key="frame" x="16" y="535" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -104,13 +118,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomTextField" destination="I4z-1b-s21" id="idj-z2-M6z"/>
                         <outlet property="cameraButton" destination="8Ay-rj-FKg" id="1Sm-Gl-GUj"/>
                         <outlet property="imagePickerView" destination="yCJ-BT-6mf" id="wUg-HB-trf"/>
+                        <outlet property="topTextField" destination="Tvg-bb-u3d" id="fbc-TU-EMp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-228" y="98"/>
+            <point key="canvasLocation" x="-228" y="97.601199400299862"/>
         </scene>
     </scenes>
     <resources>

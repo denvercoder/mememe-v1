@@ -14,6 +14,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIButton!
+    
+    var memedImage = UIImage()
+    var meme:Meme!
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.black,
@@ -35,7 +39,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         topTextField.text = "TOP TEXT"
         bottomTextField.text = "BOTTOM TEXT"
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -44,7 +47,41 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.textAlignment = NSTextAlignment.center
         topTextField.delegate = self
         bottomTextField.delegate = self
+        
+        shareButton.isEnabled = true
+        
     }
+    
+    func save() {
+        memedImage = generateMemedImage()
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image!, memedImage: memedImage)
+        self.meme = meme
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+    }
+    
+    func share() {
+        save()
+        _ = [UIActivityType.postToFacebook, UIActivityType.postToTwitter, UIActivityType.message, UIActivityType.saveToCameraRoll]
+        let activity = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activity.completionWithItemsHandler = { (activity, success, items, error) in
+
+            let applicationDelegate = (UIApplication.shared.delegate as! AppDelegate)
+            applicationDelegate.editorMeme = Meme(topText: "TOP TEXT", bottomText: "BOTTOM TEXT", image: UIImage(), memedImage: UIImage())
+        }
+        
+        self.present(activity, animated: true, completion:nil)
+        
+    }
+    
+    func generateMemedImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return memedImage
+    }
+    
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
@@ -80,12 +117,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         textField.resignFirstResponder()
         return true
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -117,6 +148,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     
+    @IBAction func shareButton(_ sender: Any) {
+        share()
+    }
     
 }
 

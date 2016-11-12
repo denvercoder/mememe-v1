@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="mememe_v1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeTabBarController" id="BYZ-38-t0r" customClass="ViewController" customModule="mememe_v1" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -51,6 +51,9 @@
                                     <constraint firstAttribute="height" constant="27" id="k31-7N-Ydn"/>
                                 </constraints>
                                 <state key="normal" image="ShareButton"/>
+                                <connections>
+                                    <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tew-4U-wk7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ay-rj-FKg" userLabel="cameraButton">
                                 <rect key="frame" x="104" y="636" width="28" height="22"/>
@@ -86,6 +89,7 @@
                                     <constraint firstAttribute="height" constant="40" id="Ro5-Tf-fvk"/>
                                 </constraints>
                                 <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4z-1b-s21" userLabel="bottomTextField">
@@ -94,6 +98,7 @@
                                     <constraint firstAttribute="height" constant="40" id="35L-pM-JZY"/>
                                 </constraints>
                                 <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                         </subviews>
@@ -130,12 +135,13 @@
                         <outlet property="bottomTextField" destination="I4z-1b-s21" id="idj-z2-M6z"/>
                         <outlet property="cameraButton" destination="8Ay-rj-FKg" id="1Sm-Gl-GUj"/>
                         <outlet property="imagePickerView" destination="yCJ-BT-6mf" id="wUg-HB-trf"/>
+                        <outlet property="shareButton" destination="W0j-RB-VqK" id="nzR-9d-vG1"/>
                         <outlet property="topTextField" destination="Tvg-bb-u3d" id="fbc-TU-EMp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2553" y="229"/>
+            <point key="canvasLocation" x="-2276" y="214"/>
         </scene>
     </scenes>
     <resources>

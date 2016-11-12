@@ -39,6 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         topTextField.text = "TOP TEXT"
         bottomTextField.text = "BOTTOM TEXT"
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -47,8 +48,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.textAlignment = NSTextAlignment.center
         topTextField.delegate = self
         bottomTextField.delegate = self
-        
-        shareButton.isEnabled = true
         
     }
     

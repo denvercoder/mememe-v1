@@ -39,16 +39,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topTextField.text = "TOP TEXT"
-        bottomTextField.text = "BOTTOM TEXT"
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = NSTextAlignment.center
-        bottomTextField.textAlignment = NSTextAlignment.center
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
+        initializeTextBox(textField: topTextField, withText: "TOP TEXT")
+        initializeTextBox(textField: bottomTextField, withText: "BOTTOM TEXT")
+    }
+    
+    
+    func initializeTextBox(textField: UITextField, withText text: String) {
+        textField.text = text
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self
     }
     
     func save() {
@@ -59,13 +59,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func share() {
-        save()
-        _ = [UIActivityType.postToFacebook, UIActivityType.postToTwitter, UIActivityType.message, UIActivityType.saveToCameraRoll]
         let activity = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activity.completionWithItemsHandler = { (activity, success, items, error) in
-
-            let applicationDelegate = (UIApplication.shared.delegate as! AppDelegate)
-            applicationDelegate.editorMeme = Meme(topText: "TOP TEXT", bottomText: "BOTTOM TEXT", image: UIImage(), memedImage: UIImage())
+            if success {
+                self.save()
+                let applicationDelegate = (UIApplication.shared.delegate as! AppDelegate)
+                applicationDelegate.editorMeme = Meme(topText: "TOP TEXT", bottomText: "BOTTOM TEXT", image: UIImage(), memedImage: UIImage())
+            }
         }
         
         self.present(activity, animated: true, completion:nil)
@@ -133,19 +133,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func selectImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        self.present(imagePicker, animated: true, completion: nil)
+        fromAlbumOrCamera(sourceType: .savedPhotosAlbum)
     }
 
     @IBAction func selectImageFromCamera(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        present(imagePicker, animated: true, completion: nil)
+        fromAlbumOrCamera(sourceType: .camera)
     }
 
+    func fromAlbumOrCamera(sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated: true, completion: nil)
+    }
     
     @IBAction func shareButton(_ sender: Any) {
         share()

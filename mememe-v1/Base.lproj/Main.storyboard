@@ -132,16 +132,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomBar" destination="cQC-HR-ACj" id="feR-cP-2t1"/>
                         <outlet property="bottomTextField" destination="I4z-1b-s21" id="idj-z2-M6z"/>
                         <outlet property="cameraButton" destination="8Ay-rj-FKg" id="1Sm-Gl-GUj"/>
                         <outlet property="imagePickerView" destination="yCJ-BT-6mf" id="wUg-HB-trf"/>
                         <outlet property="shareButton" destination="W0j-RB-VqK" id="nzR-9d-vG1"/>
+                        <outlet property="topBar" destination="WTB-vu-SMg" id="VMG-Mg-eoC"/>
                         <outlet property="topTextField" destination="Tvg-bb-u3d" id="fbc-TU-EMp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2440.1408450704225" y="76.875"/>
+            <point key="canvasLocation" x="-2684" y="94"/>
         </scene>
     </scenes>
     <resources>

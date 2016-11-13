@@ -15,6 +15,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var topBar: UIImageView!
+    @IBOutlet weak var bottomBar: UIImageView!
+
     
     var memedImage = UIImage()
     var meme:Meme!
@@ -54,33 +57,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.delegate = self
     }
     
-    func save() {
-        memedImage = generateMemedImage()
+    func save(memedImage: UIImage) {
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image, memedImage: memedImage)
         self.meme = meme
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     }
     
     func share() {
-        let activity = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        let memeToShare = generateMemedImage()
+        let activity = UIActivityViewController(activityItems: [memeToShare], applicationActivities: nil)
         activity.completionWithItemsHandler = { (activity, success, items, error) in
             
             if success {
-                self.save()
+                self.save(memedImage: memeToShare)
             }
         }
-        
         present(activity, animated: true, completion:nil)
-        
     }
     
     func generateMemedImage() -> UIImage {
+        
+        hideControls()
+
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
+        showControls()
+                
         return memedImage
+    }
+    
+    func hideControls() {
+        for view in self.view.subviews as [UIView] {
+            if let button = view as? UIButton {
+                button.isHidden = true
+            }
+        }
+    }
+    
+    func showControls() {
+        for view in self.view.subviews as [UIView] {
+            if let button = view as? UIButton {
+                button.isHidden = false
+            }
+        }
     }
     
     

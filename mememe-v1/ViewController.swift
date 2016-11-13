@@ -19,6 +19,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var memedImage = UIImage()
     var meme:Meme!
     
+    var selectedTextField: UITextField?
+    
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.black,
         NSForegroundColorAttributeName : UIColor.white,
@@ -54,7 +56,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func save() {
         memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image!, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image, memedImage: memedImage)
         self.meme = meme
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     }
@@ -68,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         
-        self.present(activity, animated: true, completion:nil)
+        present(activity, animated: true, completion:nil)
         
     }
     
@@ -94,7 +96,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y = -getKeyboardHeight(notification: notification)
+        if let text = selectedTextField {
+            if text == bottomTextField {
+               self.view.frame.origin.y = -getKeyboardHeight(notification: notification)
+            }
+        }
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -107,8 +113,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
+        selectedTextField = textField
         if textField.text == "TOP TEXT" || textField.text == "BOTTOM TEXT" {
             textField.text = ""
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        selectedTextField = nil
+        if textField == topTextField && textField.text! == "" {
+            textField.text = "TOP TEXT"
+        }
+        if textField == bottomTextField && textField.text! == "" {
+            textField.text = "BOTTOM TEXT"
         }
     }
     

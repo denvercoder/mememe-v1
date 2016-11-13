@@ -41,6 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         initializeTextBox(textField: topTextField, withText: "TOP TEXT")
         initializeTextBox(textField: bottomTextField, withText: "BOTTOM TEXT")
+        shareButton.isEnabled = false
     }
     
     
@@ -61,10 +62,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func share() {
         let activity = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activity.completionWithItemsHandler = { (activity, success, items, error) in
+            
             if success {
                 self.save()
-                let applicationDelegate = (UIApplication.shared.delegate as! AppDelegate)
-                applicationDelegate.editorMeme = Meme(topText: "TOP TEXT", bottomText: "BOTTOM TEXT", image: UIImage(), memedImage: UIImage())
             }
         }
         
@@ -144,6 +144,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = sourceType
+        shareButton.isEnabled = true
         present(imagePicker, animated: true, completion: nil)
     }
     
